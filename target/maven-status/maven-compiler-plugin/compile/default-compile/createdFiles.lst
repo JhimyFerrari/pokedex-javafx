@@ -1,0 +1,8 @@
+com/database/database.class
+module-info.class
+com/entities/Tipo.class
+com/PrimaryController.class
+com/entities/PokemonLocal.class
+com/entities/Pokemon.class
+com/SecondaryController.class
+com/App.class
