@@ -69,6 +69,14 @@ public class Pokemon {
         return this.tipos;
     }
 
+    public String getTiposInString() {
+        String tiposText = "";
+        for (Tipo tipo : tipos) {
+            tiposText += tipo.getNome() + " | ";
+        }
+        return tiposText;
+    }
+
     public String getTipoFraquezas() {
         String fraquezas = "";
         for (Tipo tipo : tipos) {
