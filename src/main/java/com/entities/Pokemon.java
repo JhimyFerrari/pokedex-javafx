@@ -23,7 +23,7 @@ public class Pokemon {
         for (Tipo t : tipos) {
             this.tipos.add(t);
         }
-        this.evoluiPara = null;
+        this.evoluiPara = evoluiPara;
         this.evoluiEm = evoluiEm;
         this.lendario = lendario;
     }

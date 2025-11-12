@@ -2,6 +2,7 @@ package com;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -26,40 +27,52 @@ public class App extends Application {
     private Label tipos;
     private Label evolucao;
     private Pokemon pokemonEscolhido;
+    private Image obj;
+    private ImageView iv;
 
     @Override
     public void start(Stage stage) throws IOException {
         database bd = new database();
         bd.inicialize();
+        System.out.println(bd.buscaPokemonByNome("Ivysaur"));
+        ;
+        poke = new Label("");
 
-        poke = new Label("Hello world");
-        tipos = new Label("Tipos vem aqui");
-        evolucao = new Label("Evolucao vem aqui");
+        tipos = new Label("");
+        evolucao = new Label("");
 
         HBox telaPrincipal = new HBox();
 
         VBox vBoxListaPokemons = new VBox();
+        vBoxListaPokemons.setMinWidth(200);
+        vBoxListaPokemons.setAlignment(Pos.CENTER);
+        vBoxListaPokemons.setSpacing(3);
         for (int i = 1; i < 150; i++) {
             Pokemon lacoRepeticao = bd.buscaPokemonById(i);
+
             Button botao = new Button(lacoRepeticao.getNome());
+            botao.setMinWidth(120);
             botao.setOnAction(e -> atualizacao(lacoRepeticao));
             vBoxListaPokemons.getChildren().add(botao);
         }
 
         ScrollPane scrollPaneListaPokemons = new ScrollPane();
         scrollPaneListaPokemons.setContent(vBoxListaPokemons);
+        scrollPaneListaPokemons.setMinWidth(200);
         telaPrincipal.getChildren().add(scrollPaneListaPokemons);
 
         VBox apresentacao = new VBox();
         telaPrincipal.getChildren().add(apresentacao);
 
-        Image obj = new Image(getClass().getResourceAsStream("/image/poke_nada.png"));
-        ImageView iv = new ImageView(obj);
-        iv.setFitWidth(200);
+        obj = new Image(getClass().getResourceAsStream("/image/poke_nada.png"));
+        iv = new ImageView(obj);
+        iv.setFitWidth(300);
         iv.setPreserveRatio(true);
 
         apresentacao.getChildren().add(poke);
         apresentacao.getChildren().add(iv);
+        apresentacao.setMinWidth(340);
+        apresentacao.setAlignment(Pos.TOP_CENTER);
 
         HBox informacoes = new HBox();
         apresentacao.getChildren().add(informacoes);
@@ -96,7 +109,15 @@ public class App extends Application {
         poke.setText(p.getNome());
         tipos.setText(p.getTiposInString());
 
-        evolucao.setText(p.getEvoluiPara().getNome());
+        System.out.println();
+        evolucao.setText((p.getEvoluiPara() != null) ? p.getEvoluiPara().getNome() : "");
+        String uri = "/image/" + String.format("%03d", p.getNumero()) + ".png";
+
+        System.out.println(uri);
+        obj = new Image(getClass().getResourceAsStream(uri));
+
+        iv.setImage(obj);
+
     }
 
 }

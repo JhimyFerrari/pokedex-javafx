@@ -20,6 +20,7 @@ public class database {
         public void inicialize() {
                 seederTipos();
                 seederPokemons();
+
         }
 
         @Override
@@ -34,11 +35,12 @@ public class database {
                 pokemons.add(new Pokemon(3, "Venusaur", montaListTiposByIndices(1, 2), null, 0, false));
                 pokemons.add(new Pokemon(2, "Ivysaur", montaListTiposByIndices(1, 2), buscaPokemonByNome("Venusaur"),
                                 32, false));
+                Pokemon i = buscaPokemonByNome("Ivysaur");
 
-                pokemons.add(new Pokemon(1, "Bulbasaur", montaListTiposByIndices(1, 2), buscaPokemonByNome("Ivysaur"),
+                pokemons.add(new Pokemon(1, "Bulbasaur", montaListTiposByIndices(1, 2), i,
                                 16,
                                 false));
-
+                System.out.println(this.buscaPokemonByNome("Bulbasaur").getNumero());
                 // Linha Charmander
                 pokemons.add(new Pokemon(6, "Charizard", montaListTiposByIndices(7, 18),
                                 null, 0, false));
@@ -66,8 +68,8 @@ public class database {
                 pokemons.add(new Pokemon(11, "Metapod", montaListTiposByIndices(9),
                                 buscaPokemonByNome("Butterfree"), 10, false));
 
-                pokemons.add(new Pokemon(10, "Caterpie", montaListTiposByIndices(9),
-                                buscaPokemonByNome("Metapod"), 7, false));
+                pokemons.add(new Pokemon(10, "Caterpie", montaListTiposByIndices(9), buscaPokemonByNome("Metapod"), 7,
+                                false));
 
                 // Linha Weedle
                 pokemons.add(new Pokemon(15, "Beedrill", montaListTiposByIndices(9, 17),
